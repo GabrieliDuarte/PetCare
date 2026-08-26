@@ -6,7 +6,7 @@ import { IoChatbubblesOutline } from "react-icons/io5";
 import { SlClock } from "react-icons/sl";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 
-export default function Features(prop) {
+export default function Features() {
   return (
     <section className="px-20">
       <div className="flex flex-col items-center justify-center">

@@ -1,9 +1,9 @@
-import { ReactElement } from "react";
+import { type ReactElement } from "react";
  
 interface CardProps {
     title: string;
     description: string;
-    icon: React.ReactElement;
+    icon: ReactElement;
 }
 
 export default function Card({ title, description, icon }: CardProps) {
