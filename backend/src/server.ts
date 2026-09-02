@@ -4,11 +4,14 @@
 } from "express";
 
 import { randomUUID } from "node:crypto";
+import { clienteRouter } from "./routes/cliente.route.js";
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+
+app.use("/cliente",clienteRouter)
 
 app.get(
   "/health",
