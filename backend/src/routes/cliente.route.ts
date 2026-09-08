@@ -18,9 +18,9 @@ clienteRouter.get("/", async (_request: Request, response: Response) => {
 // Rota POST: Cadastra um novo cliente 
 clienteRouter.post("/", async (request: Request<object, object, CriarCliente>, response: Response) => {
     try {
-        const { email, idade, nome, telefone } = request.body;
+        const dados = request.body;
         
-        const cliente = await clienteService.create(nome, telefone, idade, email);
+        const cliente = await clienteService.create(dados);
 
         // Status 201 significa "Criado com sucesso"
         return response.status(201).json(cliente);

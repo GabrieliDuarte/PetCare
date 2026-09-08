@@ -1,12 +1,12 @@
-import { pool } from "../database/connection.js"; 
-import type { Cliente } from "../types/cliente.js"; 
+import { pool } from "../database/connection.js";
+import type { Cliente, CriarCliente } from "../types/cliente.js";
 
 class ClienteService {
     // Busca todos os clientes com tipagem
     async getAll(): Promise<Cliente[]> {
         try {
             const res = await pool.query<Cliente>("SELECT * FROM clientes");
-            return res.rows; 
+            return res.rows;
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
             throw new Error("Erro no banco de dados");
@@ -15,22 +15,19 @@ class ClienteService {
 
     // Cria um cliente novo com tipagem 
     async create(
-        nome: string,
-        telefone: string,
-        idade: number,
-        email: string
+        dados: CriarCliente
     ): Promise<Cliente> {
-        try {
-            const res = await pool.query<Cliente>(
-                `INSERT INTO clientes (nome, telefone, idade, email) 
+        const res = await pool.query<Cliente>(
+            `INSERT INTO clientes (nome, telefone, idade, email) 
                  VALUES ($1, $2, $3, $4) RETURNING *`,
-                [nome, telefone, idade, email]
-            );
-            return res.rows[0];
-        } catch (error) {
-            console.error("Erro ao criar cliente:", error);
-            throw new Error("Erro ao salvar no banco de dados");
+            [dados.nome, dados.telefone, dados.idade, dados.email]
+        );
+        const cliente = res.rows[0];
+
+        if (!cliente) {
+            throw new Error("Cliente não retornado");
         }
+        return cliente
     }
 }
 
