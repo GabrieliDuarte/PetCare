@@ -1,52 +1,46 @@
- import express, {
-  type Request,
-  type Response,
-} from "express";
-
+import express, { type Request, type Response } from "express";
 import { randomUUID } from "node:crypto";
 import { clienteRouter } from "./routes/cliente.route.js";
 
 const app = express();
 const port = 3000;
 
+// Middleware(segurança) para a API entender requisições em formato JSON
 app.use(express.json());
 
-app.use("/cliente",clienteRouter)
+//  Conectando o roteador de clientes
+app.use("/cliente", clienteRouter);
 
-app.get(
-  "/health",
-  (_request: Request, response: Response) => {
+// Rota de Health Check (para ver se o servidor não caiu)
+app.get("/health", (_request: Request, response: Response) => {
     return response.json({
-      status: "ok",
+        status: "ok",
     });
-  },
-);
+});
 
 interface CreateUserBody {
-  name: string;
+    name: string;
 }
 
-app.post(
-  "/users",
-  (
+app.post("/users", (
     request: Request<object, object, CreateUserBody>,
     response: Response,
-  ) => {
+) => {
     const name = request.body.name?.trim();
 
     if (!name) {
-      return response.status(400).json({
-        error: "Name is required",
-      });
+        return response.status(400).json({
+            error: "Name is required",
+        });
     }
 
     return response.status(201).json({
-      id: randomUUID(),
-      name,
+        id: randomUUID(),
+        name,
     });
-  },
-);
+});
 
+// Inicialização do servidor
 app.listen(port, () => {
-  console.log(`API running at http://localhost:${port}`);
+    console.log(` API running at http://localhost:${port}`);
 });
