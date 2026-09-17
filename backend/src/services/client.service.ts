@@ -1,5 +1,5 @@
 import { pool } from "../database/connection.js";
-import type { Cliente, CriarCliente } from "../types/cliente.js";
+import type { Cliente, CriarCliente } from "../types/cliente.ts";
 
 class ClienteService {
     // Busca todos os clientes com tipagem
@@ -28,6 +28,43 @@ class ClienteService {
             throw new Error("Cliente não retornado");
         }
         return cliente
+    }
+
+    // Busca um cliente específico pelo ID
+    async getById(id: string): Promise<Cliente> {
+        try {
+            const res = await pool.query<Cliente>("SELECT * FROM clientes WHERE id = $1", [id]);
+            
+            if (res.rows.length === 0) {
+                throw new Error("CLIENTE_NAO_ENCONTRADO");
+            }
+            
+            return res.rows[0];
+        } catch (error: any) {
+            if (error.message === "CLIENTE_NAO_ENCONTRADO") throw error;
+            console.error("Erro ao buscar cliente por ID:", error);
+            throw new Error("Erro no banco de dados");
+        }
+    }
+
+    // Inativa um cliente (Soft Delete)
+    async inactivate(id: string): Promise<Cliente> {
+        try {
+            const res = await pool.query<Cliente>(
+                "UPDATE clientes SET ativo = false WHERE id = $1 RETURNING *", 
+                [id]
+            );
+            
+            if (res.rows.length === 0) {
+                throw new Error("CLIENTE_NAO_ENCONTRADO");
+            }
+            
+            return res.rows[0];
+        } catch (error: any) {
+            if (error.message === "CLIENTE_NAO_ENCONTRADO") throw error;
+            console.error("Erro ao inativar cliente:", error);
+            throw new Error("Erro no banco de dados");
+        }
     }
 }
 
