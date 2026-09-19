@@ -1,6 +1,6 @@
-import Functionality from "./components/Functionality"
-import Hero from "./components/Hero";
-import Navbar from "./components/Navbar";
+import Navbar from "./layout/Navbar";
+import Hero from "./layout/Hero";
+import Functionality from "./layout/Functionality";
 
 function App() {
   return (

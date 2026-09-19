@@ -1,4 +1,4 @@
-import Card from "../Cards";
+import Card from "../../components/Cards";
 import { CiCalendar } from "react-icons/ci";
 import { TbVaccine } from "react-icons/tb";
 import { FaRegHeart } from "react-icons/fa6";
