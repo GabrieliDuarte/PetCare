@@ -1,3 +1,5 @@
+//O Router cria o roteador, e Request e Response são os tipos que o TypeScript usa para entender o que entra (requisição) e o que sai (resposta).
+//O Express facilita a criação das URLs (rotas) da API.
 import { Router, type Request, type Response } from "express";
 import { clienteService } from "../services/client.service.js"; 
 import type { CriarCliente } from "../types/cliente.ts"; 

@@ -2,8 +2,8 @@ import express, { type Request, type Response } from "express";
 import { randomUUID } from "node:crypto";
 import { clienteRouter } from "./routes/cliente.route.js";
 
-const app = express();
-const port = 3000;
+const app = express(); //Cria a aplicação (o servidor web em si) 
+const port = 3000; //e define em qual "porta" do seu computador ela vai rodar
 
 // Middleware(segurança) para a API entender requisições em formato JSON
 app.use(express.json());
