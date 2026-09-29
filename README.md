@@ -45,6 +45,7 @@ npm install -D @types/express
 # Frontend (React)
 npm install react react-dom
 npm install -D @types/react @types/react-dom
+npm install @emailjs/browser
 
 ##
 Crie um arquivo .env na raiz do projeto e configure suas credenciais do PostgreSQL:
