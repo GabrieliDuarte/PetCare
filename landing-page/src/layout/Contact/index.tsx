@@ -132,6 +132,17 @@ export default function Contact() {
             Ao enviar, você concorda com nossa política de privacidade.
           </p>
         </form>
+        <div className="flex flex-col items-center mt-6">
+  <button 
+    type="submit" 
+    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-8 rounded-md w-full md:w-auto transition-colors"
+  >
+    Enviar mensagem
+  </button>
+  <p className="text-xs text-gray-500 mt-2">
+    Ao enviar, você concorda com nossa política de privacidade.
+  </p>
+</div>
       </div>
     </section>
   );
