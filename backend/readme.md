@@ -33,6 +33,7 @@ npm install
 # Banco de dados
 npm i pg
 npm install --save-dev @types/pg
+npm i bcrypt jsonwebtoken @types/bcrypt @types/jsonwebtoken
 
 # Tipagens e Typescript global
 npm install -g typescript
